@@ -5,19 +5,17 @@
 ### Changed
 
 - Guests no longer see the dock unless you call `->authenticatedOnly(false)`.
-
-- All styles are now flat and solid: no gradients, blur, rims or inner highlights, just solid fills, a 1px hairline and a small neutral drop shadow. `DockStyle::Glass` was replaced by `DockStyle::Outline`, which fills surfaces with the page background and uses a crisp border with no shadow.
-- Every style was reworked as a deliberate design rather than a recolour: Tinted uses rounded squares and squarer chips, and all four share one elevation token, one focus ring and touch-friendly hover handling.
-- The **Move dock** panel is a small map of the screen with the four corners, the current corner highlighted, and a labelled reset button.
-- Corner buttons are physical (top left, top right, …) and map to the layout direction at runtime, so labels, arrows and the resulting position agree in LTR and RTL whatever the locale. Translation keys `corner_top_start` … `corner_bottom_end` were replaced by `corner_top_left`, `corner_top_right`, `corner_bottom_left` and `corner_bottom_right`; update any published translations.
+- All styles are now flat: solid fills, a 1px hairline and a small neutral drop shadow, with no gradients, blur or inner highlights. `DockStyle::Glass` was replaced by `DockStyle::Outline`, which fills surfaces with the page background and uses a 1px border with no shadow.
+- Each style was redesigned. Tinted uses rounded squares and squarer chips, and all four share one elevation token, one focus ring and touch-friendly hover handling.
+- The Move dock panel is a small map of the screen with the four corners, the current corner highlighted, and a labelled reset button.
+- Corner buttons are physical (top left, top right and so on) and map to the layout direction at runtime, so labels, arrows and the resulting position agree in LTR and RTL. The translation keys `corner_top_start` to `corner_bottom_end` were replaced by `corner_top_left`, `corner_top_right`, `corner_bottom_left` and `corner_bottom_right`; update any published translations.
 - `pollBadges()` also accepts a closure.
 
 ### Added
 
-- Where and for whom: `authenticatedOnly()` (on by default, so the dock never shows to guests or on the login page), `guard()`, `visibleFor()`, `can()` / `authorize()` with Gate abilities, `roles()` for users with `hasRole()`, `visibleOn()` allow lists, and `hiddenOn()` deny lists that now take route name patterns, URL path patterns, Resource classes, `[Resource::class, ['edit']]` pairs and Page classes. The deny list wins. `hiddenOnAuthPages()` is on by default.
-- Devices: `hiddenOnMobile()`, `visibleOnMobile()`, `hiddenOnDesktop()` and `mobileBreakpoint()`, driven by CSS media queries. The breakpoint also controls the bar fallback and the scrim.
+- Visibility rules: `authenticatedOnly()` (on by default, so the dock never shows to guests or on the login page), `guard()`, `visibleFor()`, `can()` / `authorize()` with Gate abilities, `roles()` for users with `hasRole()`, `visibleOn()` allow lists, and `hiddenOn()` deny lists that now take route name patterns, URL path patterns, Resource classes, `[Resource::class, ['edit']]` pairs and Page classes. The deny list wins. `hiddenOnAuthPages()` is on by default.
+- Device rules: `hiddenOnMobile()`, `visibleOnMobile()`, `hiddenOnDesktop()` and `mobileBreakpoint()`, driven by CSS media queries. The breakpoint also controls the bar fallback and the scrim.
 - `DockContext` remembers the page's URL path and adds `pathIs()` and `getPageClass()`.
-
 - Label chips and bar tooltips show each action's key binding (`⇧⌘C` on Apple devices, `Ctrl+Shift+C` elsewhere), and items announce it with `aria-keyshortcuts`.
 - Touch: a long press lifts the dock so the next small movement drags it, releasing a long press no longer opens the menu, and the system context menu is suppressed while dragging.
 - `Escape` cancels a drag in progress and puts the dock back.
@@ -28,11 +26,10 @@
 
 ### Fixed
 
-- The dock stays hidden until it is placed, so a page painted mid-download never shows it at the default corner before it moves to the remembered spot.
+- The dock stays hidden until it is placed, so it no longer flashes in the default corner before jumping to the remembered spot.
 - Long labels in right-to-left layouts are truncated at their end, and key hints keep their order.
 - Badges no longer show a white box behind the pill on coloured surfaces.
 - Hover styles no longer stick after a tap on touch screens.
-
 
 ## 0.1.0 - 2026-10-08
 

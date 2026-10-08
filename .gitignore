@@ -1,0 +1,11 @@
+/vendor
+/node_modules
+/composer.lock
+/.phpunit.cache
+/.playwright-mcp
+/test-results
+/playwright-report
+.DS_Store
+.idea
+.vscode
+/docs/superpowers

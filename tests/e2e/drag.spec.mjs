@@ -58,6 +58,21 @@ test('the dock stays on screen and keeps its edge when the window resizes', asyn
     expect(after.bottom).toBeLessThanOrEqual(500 - 24)
 })
 
+test('the dock follows the layout viewport when innerHeight is larger than it', async ({ page }) => {
+    const root = await visit(page)
+
+    await page.evaluate(() => {
+        const visible = document.documentElement.clientHeight
+        Object.defineProperty(window, 'innerHeight', { configurable: true, get: () => visible + 87 })
+        window.dispatchEvent(new Event('resize'))
+    })
+    await page.waitForTimeout(100)
+
+    const visible = await page.evaluate(() => document.documentElement.clientHeight)
+
+    expect((await box(root)).bottom).toBeLessThanOrEqual(visible - 24)
+})
+
 test('a tiny movement still counts as a click', async ({ page }) => {
     const root = await visit(page)
     const from = await box(trigger(page))

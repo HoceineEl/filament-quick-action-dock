@@ -57,7 +57,7 @@ function environment(root, config) {
 
     return {
         dir: getComputedStyle(root).direction === 'rtl' ? 'rtl' : 'ltr',
-        viewport: { width: document.documentElement.clientWidth || window.innerWidth, height: window.innerHeight },
+        viewport: { width: document.documentElement.clientWidth || window.innerWidth, height: document.documentElement.clientHeight || window.innerHeight },
         size: { width: root.offsetWidth, height: root.offsetHeight },
         margins: {
             top: config.offset + inset('Top'),

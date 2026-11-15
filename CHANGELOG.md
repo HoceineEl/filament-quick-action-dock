@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1 - 2026-11-15
+
+### Fixed
+
+- The dock measures the viewport height from the layout viewport (`clientHeight`) instead of `window.innerHeight`, so a bottom dock no longer slips below the visible area in browsers where `innerHeight` is taller than the page. Thanks @gsferro. (#2, #3)
+
 ## 0.2.0 - 2026-10-08
 
 ### Changed
